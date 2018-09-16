@@ -1,39 +1,38 @@
 import React, { Component } from 'react';
-import { Grid, Navbar, Jumbotron, Button, Alert} from 'react-bootstrap';
+import { Grid, Jumbotron, Nav, NavItem, NavDropdown, MenuItem, PageHeader, small} from 'react-bootstrap';
 
-import logo from './logo.svg';
+//import logo from './logo.svg';
 import './App.css';
 
 class App extends Component {
+
   render() {
     return (
       <div>
-        <Navbar inverse fixedTop>
-          <Grid>
-            <Navbar.Header>
-              <Navbar.Brand>
-                <a href="/">React App</a>
-              </Navbar.Brand>
-              <Navbar.Toggle />
-            </Navbar.Header>
-          </Grid>
-        </Navbar>
+
         <Jumbotron>
           <Grid>
-            <h1>Welcome to React</h1>
-            <Alert bsStyle="warning">
-              <strong>Holy guacamole!</strong> Best check yo self, you're not looking too
-              good.
-            </Alert>
-            <p>
-              <Button
-                bsStyle="success"
-                bsSize="large"
-                href="http://react-bootstrap.github.io/components.html"
-                target="_blank">
-                View React Bootstrap Docs
-              </Button>
-            </p>
+            <PageHeader>
+              Example page header <small>Subtext for header</small>
+            </PageHeader>
+              <Nav bsStyle="tabs" activeKey="1">
+                <NavItem eventKey="1" href="/home">
+                  NavItem 1 content
+                </NavItem>
+                <NavItem eventKey="2" title="Item">
+                  NavItem 2 content
+                </NavItem>
+                <NavItem eventKey="3" disabled>
+                  NavItem 3 content
+                </NavItem>
+                <NavDropdown eventKey="4" title="Dropdown" id="nav-dropdown">
+                  <MenuItem eventKey="4.1">Action</MenuItem>
+                  <MenuItem eventKey="4.2">Another action</MenuItem>
+                  <MenuItem eventKey="4.3">Something else here</MenuItem>
+                  <MenuItem divider />
+                  <MenuItem eventKey="4.4">Separated link</MenuItem>
+                </NavDropdown>
+              </Nav>
           </Grid>
         </Jumbotron>
       </div>
