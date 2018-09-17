@@ -1,43 +1,73 @@
 import React, { Component } from 'react';
-import { Grid, Jumbotron, Nav, NavItem, NavDropdown, MenuItem, PageHeader, small} from 'react-bootstrap';
-
-//import logo from './logo.svg';
-import './App.css';
+import {
+    Collapse,
+    Navbar,
+    NavbarToggler,
+    NavbarBrand,
+    Nav,
+    NavItem,
+    NavLink,
+    Container,
+    Row,
+    Col,
+    Jumbotron,
+    Button
+} from 'reactstrap';
 
 class App extends Component {
+    constructor(props) {
+        super(props);
 
-  render() {
-    return (
-      <div>
-
-        <Jumbotron>
-          <Grid>
-            <PageHeader>
-              Example page header <small>Subtext for header</small>
-            </PageHeader>
-              <Nav bsStyle="tabs" activeKey="1">
-                <NavItem eventKey="1" href="/home">
-                  NavItem 1 content
-                </NavItem>
-                <NavItem eventKey="2" title="Item">
-                  NavItem 2 content
-                </NavItem>
-                <NavItem eventKey="3" disabled>
-                  NavItem 3 content
-                </NavItem>
-                <NavDropdown eventKey="4" title="Dropdown" id="nav-dropdown">
-                  <MenuItem eventKey="4.1">Action</MenuItem>
-                  <MenuItem eventKey="4.2">Another action</MenuItem>
-                  <MenuItem eventKey="4.3">Something else here</MenuItem>
-                  <MenuItem divider />
-                  <MenuItem eventKey="4.4">Separated link</MenuItem>
-                </NavDropdown>
-              </Nav>
-          </Grid>
-        </Jumbotron>
-      </div>
-    );
-  }
+        this.toggle = this.toggle.bind(this);
+        this.state = {
+            isOpen: false
+        };
+    }
+    toggle() {
+        this.setState({
+            isOpen: !this.state.isOpen
+        });
+    }
+    render() {
+        return (
+            <div>
+                <Navbar color="inverse" light expand="md">
+                    <NavbarBrand href="/">reactstrap</NavbarBrand>
+                    <NavbarToggler onClick={this.toggle} />
+                    <Collapse isOpen={this.state.isOpen} navbar>
+                        <Nav className="ml-auto" navbar>
+                            <NavItem>
+                                <NavLink href="/components/">Components</NavLink>
+                            </NavItem>
+                            <NavItem>
+                                <NavLink href="https://github.com/reactstrap/reactstrap">Github</NavLink>
+                            </NavItem>
+                        </Nav>
+                    </Collapse>
+                </Navbar>
+                <Jumbotron>
+                    <Container>
+                        <Row>
+                            <Col>
+                                <h1>Welcome to React</h1>
+                                <p>
+                                    <Button
+                                        tag="a"
+                                        color="success"
+                                        size="large"
+                                        href="http://reactstrap.github.io"
+                                        target="_blank"
+                                    >
+                                        View Reactstrap Docs
+                                    </Button>
+                                </p>
+                            </Col>
+                        </Row>
+                    </Container>
+                </Jumbotron>
+            </div>
+        );
+    }
 }
 
 export default App;
