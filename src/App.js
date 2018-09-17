@@ -20,14 +20,53 @@ class App extends Component {
 
         this.toggle = this.toggle.bind(this);
         this.state = {
-            isOpen: false
+            isOpen: false,
+            connected: false
         };
     }
     toggle() {
+
         this.setState({
             isOpen: !this.state.isOpen
         });
+        //console.log('test');
+        this.logconsole('test');
     }
+
+    logconsole(msg) {
+        console.log(msg);
+        let the_msg = {
+          name: 'channel add',
+          data: {
+            id: 'lalala yeyeye',
+            name: 'dmamamam'
+          }
+        }
+        this.ws.send(JSON.stringify(the_msg));
+    }
+
+    componentDidMount() {
+      let ws = this.ws = new WebSocket('ws://echo.websocket.org');
+      ws.onmessage = this.message.bind(this);
+      ws.onopen = this.open.bind(this);
+      ws.onclose = this.close.bind(this);
+    }
+
+    message(e) {
+      const event = JSON.parse(e.data);
+      if (event.name === 'channel add') {
+        this.logconsole(event.data);
+      }
+    }
+
+    open() {
+      this.setState({connected: true});
+    }
+
+    close() {
+      this.setState({connected: false});
+    }
+
     render() {
         return (
             <div>
@@ -57,6 +96,7 @@ class App extends Component {
                                         size="large"
                                         href="http://reactstrap.github.io"
                                         target="_blank"
+                                        onClick={this.toggle}
                                     >
                                         View Reactstrap Docs
                                     </Button>
